@@ -6,12 +6,12 @@
  * @flow
  */
 
-import React, {Fragment} from 'react';
-import AppNavigation from "./src/AppNavigation"
+import React from "react";
+import AppNavigation from "./src/AppNavigation";
 
-class App extends React.Component{
+class App extends React.Component {
   render() {
-    return <AppNavigation />
+    return <AppNavigation />;
   }
 }
 export default App;
