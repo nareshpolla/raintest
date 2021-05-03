@@ -6,11 +6,14 @@ import {
   FlatList,
   TouchableHighlight,
   StatusBar,
+  Button,
+  Slider,
 } from "react-native";
 
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 import Icon from "react-native-vector-icons/Ionicons";
+// import Slider from "@react-native-community/slider";
 
 export default class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -73,11 +76,35 @@ export default class Home extends Component {
       <View style={styles.container}>
         <StatusBar backgroundColor="#82CAFA" barStyle="light-content" />
 
-        <FlatList
-          data={this.state.res}
-          renderItem={this.renderItem}
-          keyExtractor={(item, index) => index}
-        />
+        <View>
+          <Text>How much do you want to withdraw?</Text>
+
+          {/*Text to show slider value*/}
+          <Text>Value of slider is : {this.state.sliderValue}</Text>
+
+          {/*Slider with max, min, step and initial value*/}
+          <Slider
+            maximumValue={41}
+            minimumValue={0}
+            minimumTrackTintColor="#307ecc"
+            maximumTrackTintColor="#000000"
+            step={1}
+            value={this.state.sliderValue}
+            onValueChange={(sliderValue) => {
+              this.setState({
+                sliderValue: sliderValue,
+              });
+            }}
+          />
+          <Button
+            title="Continue"
+            onPress={() =>
+              this.props.navigation.navigate("Checkout", {
+                selectedData: "",
+              })
+            }
+          />
+        </View>
       </View>
     );
   }
@@ -89,8 +116,13 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    padding: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    justifyContent: "center",
     backgroundColor: "#F5FCFF",
   },
+
   itemBlock: {
     backgroundColor: "#ADD8E6",
     flexDirection: "column",
@@ -104,9 +136,9 @@ const styles = StyleSheet.create({
     height: 56,
   },
   itemName: {
-    marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10,
+    marginTop: 20,
+    marginLeft: 20,
+    marginRight: 20,
     color: "white",
     fontWeight: "bold",
     fontSize: 16,
